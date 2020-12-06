@@ -3,6 +3,8 @@ import Data.Ix
 import Text.Parsec
 import Text.Parsec.String
 
+import AoC20Lib
+
 data Password = Password Int Int Char String
 
 number = many1 digit >>= return . read
@@ -21,8 +23,6 @@ password = do
 
 simpleParse :: Parser a -> String -> a
 simpleParse p s = case parse p "" s of {Left e -> error $ show e; Right r -> r}
-
-occurences x = length . filter (==x)
 
 solution v = length . filter v . map (simpleParse password)
 
