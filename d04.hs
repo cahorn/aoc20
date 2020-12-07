@@ -7,9 +7,6 @@ import Text.Parsec.String
 
 import AoC20Lib
 
-blocks = let block = many1 $ notFollowedBy (count 2 newline) >> anyChar
-         in simpleParse $ sepEndBy block (newline >> many1 newline)
-
 tryParse :: Parser a -> String -> Bool
 tryParse p = isRight . parse p ""
 
