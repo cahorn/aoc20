@@ -1,15 +1,9 @@
-import Data.Char
 import Data.Ix
 import Text.Parsec
-import Text.Parsec.String
 
 import AoC20Lib
 
 data Password = Password Int Int Char String
-
-number = many1 digit >>= return . read
-
-word = many1 $ satisfy (not . isSpace)
 
 password = do
     l <- number
@@ -20,9 +14,6 @@ password = do
     char ':' >> space
     s <- word
     return (Password l h c s)
-
-simpleParse :: Parser a -> String -> a
-simpleParse p s = case parse p "" s of {Left e -> error $ show e; Right r -> r}
 
 solution v = length . filter v . map (simpleParse password)
 
