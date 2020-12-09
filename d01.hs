@@ -1,6 +1,6 @@
-cartesians l = iterate (>>= \p -> map (:p) l) [[]]
+import AoC20Lib
 
-solution n = product . head . filter ((==2020) . sum) . (!!n) . cartesians
+solution n = product . head . sumTo 2020 . (!!n) . cartesians
 
 part1 = solution 2 . map read . lines
 

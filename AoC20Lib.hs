@@ -4,7 +4,11 @@ import Data.Char
 import Text.Parsec
 import Text.Parsec.String
 
+cartesians l = iterate (>>= \p -> map (:p) l) [[]]
+
 occurences x = length . filter (==x)
+
+sumTo n = filter ((==n) . sum)
 
 blocks = let block = many1 $ notFollowedBy (count 2 newline) >> anyChar
          in simpleParse $ sepEndBy block (newline >> many1 newline)
