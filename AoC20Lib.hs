@@ -10,7 +10,10 @@ blocks = let block = many1 $ notFollowedBy (count 2 newline) >> anyChar
          in simpleParse $ sepEndBy block (newline >> many1 newline)
 
 number :: Parser Int
-number = many1 digit >>= return . read
+number = do
+    s <- option '+' (oneOf "+-")
+    n <- many1 digit >>= return . read
+    return $ if s == '+' then n else negate n
 
 word :: Parser String
 word = many1 $ satisfy (not . isSpace)
