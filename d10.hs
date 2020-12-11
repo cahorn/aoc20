@@ -12,7 +12,7 @@ arrangements as = arrs
 
 adapters = (\as -> 0 : as ++ [maximum as + 3]) . sort . map read . lines
 
-part1 = product . (occurences <$> [1, 3] <*>) . pure . differences . adapters
+part1 = product . (occurrences <$> [1, 3] <*>) . pure . differences . adapters
 
 part2 = last . arrangements . adapters
 

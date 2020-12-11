@@ -9,9 +9,9 @@ line a (r, c) (dr, dc) = let l = iterate (\(a, b) -> (a+dr, b+dc)) (r, c)
 cardLines a p = map (line a p) ds
     where ds = [(i, j) | i <- [(-1)..1], j <- [(-1)..1], i /= 0 || j /= 0]
 
-adjacent a = occurences '#' . map head . filter (/=[]) . cardLines a
+adjacent a = occurrences '#' . map head . filter (/=[]) . cardLines a
 
-sight a = occurences '#' . first . cardLines a
+sight a = occurrences '#' . first . cardLines a
     where first = map head . filter (/=[]) . map (dropWhile (=='.'))
 
 rule m 'L' os = if os == 0 then '#' else 'L'
@@ -23,7 +23,7 @@ next occ rule a = accum rule a $ zip (indices a) (map (occ a) (indices a))
 fixpoint f initial = let fs = iterate f initial
                      in fst . head . dropWhile (uncurry (/=)) $ zip fs (tail fs)
 
-solution f = occurences '#' . elems . fixpoint f . gridFromList . lines
+solution f = occurrences '#' . elems . fixpoint f . gridFromList . lines
 
 part1 = solution $ next adjacent (rule 4)
 

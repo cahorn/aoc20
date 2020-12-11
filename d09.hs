@@ -8,7 +8,6 @@ filterLen p = filter (p . length)
 validate (x:xs) = let different (a:b:[]) = a /= b
                   in (/=[]) . sumTo x . filter different $ cartesians xs !! 2
 
-
 invalid = let ws = map (take 26) . filterLen (25<) . tails . reverse
           in head . head . filter (not . validate) . ws
 

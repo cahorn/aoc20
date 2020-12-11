@@ -7,7 +7,7 @@ import Text.Parsec.String
 
 cartesians l = iterate (>>= \p -> map (:p) l) [[]]
 
-occurences x = length . filter (==x)
+occurrences x = length . filter (==x)
 
 sumTo n = filter ((==n) . sum)
 
